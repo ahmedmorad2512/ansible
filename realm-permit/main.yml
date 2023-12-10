@@ -1,0 +1,10 @@
+---
+- name: realm permit
+  hosts: all
+  become: yes
+#  ignore_errors: yes
+  
+  tasks:
+  - name: realm permit
+    command: /bin/bash -c "realm permit adm-t1ashetiwi@UaeApp.local adm-t1yhussain@UaeApp.local adm-t1akhan@UaeApp.local adm-t1mnizamuddin@UaeApp.local adm-t1amorad@UaeApp.local adm-t1aahmad@UaeApp.local"
+
