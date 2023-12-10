@@ -1,0 +1,9 @@
+---
+- name: pam-auth-update --enable mkhomedir
+  hosts: all
+  become: yes
+#  ignore_errors: yes
+
+  tasks:
+  - name: pam-auth-update --enable mkhomedir
+    command: pam-auth-update --enable mkhomedir
