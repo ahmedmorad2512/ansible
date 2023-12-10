@@ -1,0 +1,17 @@
+-
+  name: Adding new line in /etc/sudoers lineinfile
+  hosts: all
+  become: yes
+  tasks:
+    -
+      name: Update entry into /etc/sudoers
+      lineinfile:
+       path: /etc/sudoers
+       line: '{{ item }}'
+      with_items: 
+        - 'adm-t1aahmad@UaeApp.local ALL=(ALL) ALL'
+        - 'adm-t1ashetiwi@UaeApp.local ALL=(ALL) ALL'
+        - 'adm-t1yhussain@UaeApp.local ALL=(ALL) ALL'
+        - 'adm-t1akhan@UaeApp.local ALL=(ALL) ALL'
+        - 'adm-t1mnizamuddin@UaeApp.local ALL=(ALL) ALL'
+        - 'adm-t1amorad@UaeApp.local ALL=(ALL) ALL'
