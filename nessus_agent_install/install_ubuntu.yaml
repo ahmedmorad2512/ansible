@@ -1,0 +1,36 @@
+---
+- hosts: all
+  #  remote_user: root
+  become: yes
+    #  ignore_errors: yes  
+  vars:
+    nessus_key: c7718f4cdc54507fd61a9556031fd3b2ebcf4c4ccab39956e6b298fba5a83a90 
+      #    agent_group: Geidea - Agents, Geidea – OCI
+    agent_host: 10.245.137.211
+    agent_port: 8834
+    agent_file_src: /home/ubuntu/ansible/nessus_agent_install/nessus_agent.deb
+    agent_file_dest: /tmp/nessus_agent.deb
+  tasks:
+    - name: Check link status
+      shell: /opt/nessus_agent/sbin/nessuscli agent status; true
+      register: nessus_link_status
+    - name: Check Nessus Agent Service Status
+      shell: service nessusagent status; true
+      register: nessus_agent_service_status
+    - name: Copy deb file to server
+      copy:
+        src: "{{ agent_file_src }}"
+        dest: "{{ agent_file_dest }}"
+      when: "'Linked to: {{ agent_host }}' not in nessus_link_status.stdout"
+    - name: Install Nessus Agent deb from a local file
+      command: sudo dpkg -i "{{ agent_file_dest }}"
+      when: "'Linked to: {{ agent_host }}' not in nessus_link_status.stdout"
+    - name: Link nessus agent to tenable
+      shell: /opt/nessus_agent/sbin/nessuscli agent link --host={{ agent_host }}
+        --port={{ agent_port }} --key={{ nessus_key }}
+      when: "'Linked to: {{ agent_host }}' not in nessus_link_status.stdout"
+    - name: Starting Nessus Agent service
+      command: service nessusagent start
+      when: "('Linked to: {{ agent_host }}' not in nessus_link_status.stdout) and
+        ('active (running)' not in nessus_agent_service_status.stdout)"
+
