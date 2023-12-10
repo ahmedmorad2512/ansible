@@ -1,0 +1,37 @@
+auditbeat.modules:
+
+- module: file_integrity
+  paths:
+  - /etc
+  - /home
+  - /bin
+  - /usr/bin
+  - /sbin
+  - /oraappl01/app/oracle/product/19.3.0/dbhome_1/
+  
+  exclude_files:
+  - '(?i)\.lnk$'
+  - '(?i)\.swp$'
+  - '(?i)\.log$'
+  - '(?i)\.mdf$'
+  - '(?i)\.ldf$'
+  - '(?i)\.txt$'
+
+  recursive: true
+
+- module: system
+  datasets:
+    - process
+
+  state.period: 12h
+
+setup.template.settings:
+  index.number_of_shards: 1
+
+output.logstash:
+
+  hosts: ["10.245.136.71:5045"]
+
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
