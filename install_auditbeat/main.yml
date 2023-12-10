@@ -1,0 +1,67 @@
+---
+- hosts: all
+  become: yes
+  ignore_errors: yes
+  tasks:
+
+    - name: Update entry into /etc/rsyslog.conf for RHEL
+      lineinfile:
+       path: /etc/rsyslog.conf
+       line: '{{ item }}'
+      with_items:
+        - '*.* @10.245.136.71:5514'
+      tags: rhel
+
+    - name: Update entry into /etc/rsyslog.d/50-default.conf for Ubuntu
+      lineinfile:
+       path: /etc/rsyslog.d/50-default.conf
+       line: '{{ item }}'
+      with_items:
+        - '*.* @10.245.136.71:5514'
+      tags: ubuntu
+
+    - name: Restart service rsyslog.service
+      ansible.builtin.service:
+        name: rsyslog
+        state: restarted
+      tags: always
+
+    - name: Copy .RPM to servers
+      copy:
+        src: "/home/ubuntu/ansible/install_auditbeat/auditbeat-7.16.2-x86_64.rpm"
+        dest: "/tmp/auditbeat-7.16.2-x86_64.rpm"
+      tags: rhel
+
+    - name: Copy .DEB to servers
+      copy:
+        src: "/home/ubuntu/ansible/install_auditbeat/auditbeat-7.16.2-amd64.deb"
+        dest: "/tmp/auditbeat-7.16.2-amd64.deb"
+      tags: ubuntu
+
+    - name: Install rpm from a local file
+      command: sudo rpm -Uvh /tmp/auditbeat-7.16.2-x86_64.rpm
+      tags: rhel
+
+    - name: Install deb from a local file
+      command: sudo dpkg -i /tmp/auditbeat-7.16.2-amd64.deb
+      tags: ubuntu
+
+    - name: Remove default auditbeat.yml
+      command: rm -f /etc/auditbeat/auditbeat.yml
+      tags: always
+
+    - name: Copy auditbeat.yml to servers
+      copy:
+        src: "/home/ubuntu/ansible/install_auditbeat/auditbeat.yml"
+        dest: "/etc/auditbeat/auditbeat.yml"
+      tags: always
+
+    - name: Start and enable auditbeat service
+      command: systemctl enable --now auditbeat.service
+      tags: always
+
+    - name: Remove agent source /tmp/auditbeat-7.16.2-*
+      ansible.builtin.file:
+       path: /tmp/auditbeat-7.16.2-*.*
+       state: absent
+      tags: always
