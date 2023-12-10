@@ -1,0 +1,12 @@
+-
+  name: Adding new line in /etc/profile lineinfile
+  hosts: all
+  become: yes
+  tasks:
+    -
+      name: Update entry into /etc/resolv.conf
+      lineinfile:
+       path: /etc/profile
+       line: '{{ item }}'
+      with_items: 
+        - 'export HISTTIMEFORMAT="%d.%m.%y %T  "'
