@@ -1,0 +1,29 @@
+---
+- hosts: all
+  remote_user: admuser
+  become: yes
+  vars:
+    fireeye_file_src: /home/ubuntu/ansible/install_fireeye_agent/fire_eye/xagt-34.28.31-1.el7.x86_64.rpm
+    fireeye_file_dest: /tmp/xagt-34.28.31-1.el7.x86_64.rpm
+    fireeye_conf_file_src: /home/ubuntu/ansible/install_fireeye_agent/fire_eye/agent_config.json
+    fireeye_conf_file_dest: /tmp/agent_config.json
+  tasks:
+    - name: Copy Fireeye Agent rpm file to server
+      copy:
+        src: "{{ fireeye_file_src }}"
+        dest: "{{ fireeye_file_dest }}"
+    - name: Copy Fireeye Agent conf file to server
+      copy:
+        src: "{{ fireeye_conf_file_src }}"
+        dest: "{{ fireeye_conf_file_dest }}"
+
+    - name: Install Fire_eye Agent rpm from a local file
+      command: sudo rpm -ivh "{{ fireeye_file_dest }}"
+      #      yum:
+      #        name: "{{ trendmicro_file_dest }}"
+      #        state: present
+      #        disable_gpg_check: yes
+    - name: Replace Fireeye Agent conf file to server
+      command: /opt/fireeye/bin/xagt -i /tmp/agent_config.json
+    - name: Start Fire_eye Agent service
+      command: sudo systemctl start xagt.service

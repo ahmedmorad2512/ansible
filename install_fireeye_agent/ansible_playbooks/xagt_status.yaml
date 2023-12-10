@@ -1,0 +1,8 @@
+- name: realm permit
+  hosts: all
+  become: yes
+#  ignore_errors: yes
+
+  tasks:
+  - name: realm permit
+    command: /bin/bash -c "systemctl status xagt.service"
