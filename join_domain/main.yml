@@ -1,0 +1,44 @@
+---
+- name: Join Linux server to AD domain
+  hosts: all
+  become: yes
+#  ignore_errors: yes
+  
+  vars:
+    ad_domain: UAEAPPPP.LOCAL
+    ad_user: svc-linux-join
+    ad_password: Geidea@654321@
+
+  tasks:
+  - name: Install required packages
+    package:
+      name:
+        - realmd
+        - sssd
+      state: present
+
+  - name: Join the AD domain
+    command: /bin/bash -c "echo {{ ad_password }} | realm join -v --user {{ ad_user }} {{ ad_domain }}"
+    register: join_result
+    ignore_errors: yes
+
+  - name: Check the AD join result
+    fail:
+      msg: "Unable to join the AD domain, {{ join_result.stderr }}"
+    when: join_result.rc != 0
+
+  - name: Restart SSSD service
+    service:
+      name: sssd
+      state: restarted
+      enabled: yes
+
+  - name: Validate the AD join
+    command: getent passwd {{ ad_user }}@{{ ad_domain  }}
+    register: validate_result
+    ignore_errors: yes
+
+  - name: Check the validation result
+    fail:
+      msg: "AD join validation failed, {{ validate_result.stderr }}"
+    when: validate_result.rc != 0
