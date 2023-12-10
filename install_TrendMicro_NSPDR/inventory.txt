@@ -1,0 +1,67 @@
+[Softpos_DR]
+NSPDrGrafanaP1	ansible_ssh_host=10.128.128.130	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NspDrMaAcqGateP1 ansible_ssh_host=10.128.128.2	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NspDrAcqGateP2	ansible_ssh_host=10.128.128.3	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NSPDrSpRedisP1	ansible_ssh_host=10.128.128.4	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NSPDrSpRedisP2	ansible_ssh_host=10.128.128.5	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NspDrSpPsqlP1	ansible_ssh_host=10.128.128.66	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NSPDrSpPsqlP2	ansible_ssh_host=10.128.128.67	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NSPDrSpPsqlP3	ansible_ssh_host=10.128.128.68	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+[PAX_DR]
+NspDrNginxKaP01	ansible_ssh_host=10.242.152.21	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrNginxKaP02	ansible_ssh_host=10.242.152.22	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrWebAppP01	ansible_ssh_host=10.242.152.23	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrWebAppP02 	ansible_ssh_host=10.242.152.24	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrWebAppP03	ansible_ssh_host=10.242.152.25	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrPxMySqlP01	ansible_ssh_host=10.242.72.21	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrPxMySqlP02	ansible_ssh_host=10.242.72.22	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrPxMySqlP03 	ansible_ssh_host=10.242.72.23	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrMgmtSrvP01	ansible_ssh_host=10.242.152.26	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+[Spectra_DR]
+NspDrDecForP01 	ansible_ssh_host=10.242.200.31	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrDecForP02 	ansible_ssh_host=10.242.200.32	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrSpMySqlP01	ansible_ssh_host=10.242.72.31	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrSpMySqlP02	ansible_ssh_host=10.242.72.32	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspDrSpMySqlP03 	ansible_ssh_host=10.242.72.33	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+[Splunk_DR]
+NspDrIf1	ansible_ssh_host=10.27.27.142	ansible_ssh_user=svc-midldap	ansible_ssh_pass="3(!C[HruFecH#sc"
+NspDrIf2	ansible_ssh_host=10.27.27.143	ansible_ssh_user=svc-midldap	ansible_ssh_pass="3(!C[HruFecH#sc"
+[Iview_DR]
+DRC-iVIEW	ansible_ssh_host=10.9.9.56	ansible_ssh_user=svc-midldap	ansible_ssh_pass="3(!C[HruFecH#sc"
+SEC-iVIEW-DRC	ansible_ssh_host=10.9.9.58	ansible_ssh_user=svc-midldap	ansible_ssh_pass="3(!C[HruFecH#sc"
+[Veeam_DR]
+nspdrvrepop02	ansible_ssh_host=10.34.34.38	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+[Softpos_Main]
+NSPMaGrafanaP1	ansible_ssh_host=10.28.28.130	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NspMaAcqGateP1	ansible_ssh_host=10.28.28.2		ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NspMaAcqGateP2	ansible_ssh_host=10.28.28.3		ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NSPMaSpRedisP1	ansible_ssh_host=10.28.28.4		ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NSPMaSpRedisP2	ansible_ssh_host=10.28.28.5		ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NspMaSpPsqlP1	ansible_ssh_host=10.28.28.66	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NSPMaSpPsqlP2	ansible_ssh_host=10.28.28.67	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+NSPMaSpPsqlP3	ansible_ssh_host=10.28.28.68	ansible_ssh_user=softpos	ansible_ssh_pass=$0ftpos
+[PAX_Main]
+NspMaNginxKaP01	ansible_ssh_host=10.241.152.21	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaNginxKaP02	ansible_ssh_host=10.241.152.22	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaWebAppP01	ansible_ssh_host=10.241.152.23	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaWebAppP02	ansible_ssh_host=10.241.152.24	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaWebAppP03	ansible_ssh_host=10.241.152.25	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaPxMySqlP01	ansible_ssh_host=10.241.72.21	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaPxMySqlP02	ansible_ssh_host=10.241.72.22	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaPxMySqlP03	ansible_ssh_host=10.241.72.23	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaMgmtSrvP01	ansible_ssh_host=10.241.152.26	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+[Spectra_Main]
+NspMaDecForP01 	ansible_ssh_host=10.241.200.31	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaDecForP02	ansible_ssh_host=10.241.200.32	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaSpMySqlP01	ansible_ssh_host=10.241.72.31	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaSpMySqlP02	ansible_ssh_host=10.241.72.32	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+NspMaSpMySqlP03	ansible_ssh_host=10.241.72.33	ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8
+[Splunk_Main]
+NspMaIf2	ansible_ssh_host=10.27.27.13		ansible_ssh_user=svc-midldap	ansible_ssh_pass="3(!C[HruFecH#sc"		
+NspMaSh1	ansible_ssh_host=10.27.27.14		ansible_ssh_user=svc-midldap	ansible_ssh_pass="3(!C[HruFecH#sc"		
+NspMaIf1	ansible_ssh_host=10.27.27.15		ansible_ssh_user=svc-midldap	ansible_ssh_pass="3(!C[HruFecH#sc"		
+[Iview_Main]
+PRIM-iVIEW	ansible_ssh_host=10.6.6.52			ansible_ssh_user=svc-midldap	ansible_ssh_pass="3(!C[HruFecH#sc"
+SEC-iVIEW	ansible_ssh_host=10.6.6.54			ansible_ssh_user=svc-midldap	ansible_ssh_pass="3(!C[HruFecH#sc"
+[Veeam_Main]
+NspMaVTapeP02	ansible_ssh_host=10.34.34.7		ansible_ssh_user=svc-veeambkp	ansible_ssh_pass=G-%g]vcA7.P~bo8

@@ -1,0 +1,14 @@
+-
+  name: Adding new line in /etc/hosts lineinfile
+  hosts: all
+  #gather_facts: no
+  become: yes
+  tasks:
+    -
+      name: Update entry into /etc/hosts
+      lineinfile:
+       path: /etc/hosts
+       line: '{{ item }}'
+      with_items:
+        - '10.2.2.54 NspMaTmAppP01.geidea.nsp'
+        - '10.2.2.54 NspMaTmAppP01'

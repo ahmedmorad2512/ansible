@@ -1,0 +1,59 @@
+---
+- hosts: all
+  remote_user: adm-t1amorad@geidea.nsp
+  become: yes
+  ignore_errors: true
+  vars:
+    trendmicro_file_src_ubuntu20: /home/adm-t1amorad/Ansible/install_TrendMicro_NSPDR/Agent-Core-Ubuntu_20.04-20.0.0-7303.x86_64.deb
+    trendmicro_file_dest_ubuntu20: /tmp/Agent-Core-Ubuntu_20.04-20.0.0-7303.x86_64.deb
+    trendmicro_file_src_rhel8: /home/adm-t1amorad/Ansible/install_TrendMicro_NSPDR/Agent-PGPCore-RedHat_EL8-20.0.0-7303.x86_64.rpm
+    trendmicro_file_dest_rhel8: /tmp/Agent-PGPCore-RedHat_EL8-20.0.0-7303.x86_64.rpm
+    trendmicro_file_src_rhel9: /home/adm-t1amorad/Ansible/install_TrendMicro_NSPDR/Agent-PGPCore-RedHat_EL9-20.0.0-7303.x86_64.rpm
+    trendmicro_file_dest_rhel9: /tmp/Agent-PGPCore-RedHat_EL9-20.0.0-7303.x86_64.rpm
+  tasks:
+    - name: Unlock ds-agent protection
+      command: sudo /opt/ds_agent/dsa_control -s 0 -p P@ssw0rdP@ssw0rd
+      tags: unlock
+
+    - name: Copy TrendMicro Ubuntu 20 Agent file to server
+      copy:
+        src: "{{ trendmicro_file_src_ubuntu20 }}"
+        dest: "{{ trendmicro_file_dest_ubuntu20 }}"
+      tags: copy_ubuntu20
+
+    - name: Remove TrendMicro Agent RHEL from a local file
+      command: sudo rpm -e ds_agent
+      tags: remove
+
+
+    - name: Copy TrendMicro RHEL 8 Agent file to server
+      copy:
+        src: "{{ trendmicro_file_src_rhel8 }}"
+        dest: "{{ trendmicro_file_dest_rhel8 }}"
+      tags: copy_rhel8
+    - name: Copy TrendMicro RHEL 9 Agent file to server
+      copy:
+        src: "{{ trendmicro_file_src_rhel9 }}"
+        dest: "{{ trendmicro_file_dest_rhel9 }}"
+      tags: copy_rhel9
+
+    - name: Install TrendMicro Agent Ubuntu 20 from a local file
+      command: sudo dpkg -i "{{ trendmicro_file_dest_ubuntu20 }}"
+      tags: install_ubuntu20
+    - name: Install TrendMicro Agent RHEL8 from a local file
+      command: sudo rpm -Uvh "{{ trendmicro_file_dest_rhel8 }}"
+      tags: install_rhel8
+    - name: Install TrendMicro Agent RHEL9 from a local file
+      command: sudo rpm -Uvh "{{ trendmicro_file_dest_rhel9 }}"
+      tags: install_rhel9
+
+    - name: Start TrendMicro Agent service
+      command: sudo systemctl start ds_agent.service
+      tags: start_ds
+  
+    - name: Activate TrendMicro Ubuntu Agent service
+      command: sudo /opt/ds_agent/dsa_control -a dsm://10.2.2.54:4120/ "policyid:13"
+      tags: activate_ubuntu
+    - name: Activate TrendMicro RHEL Agent service
+      command: sudo /opt/ds_agent/dsa_control -a dsm://10.2.2.54:4120/ "policyid:12"
+      tags: activate_rhel

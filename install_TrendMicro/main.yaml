@@ -1,0 +1,20 @@
+---
+- name: Install TrendMicro Agent on Linux
+  hosts: all
+  become: yes
+  gather_facts: no
+  ignore_errors: true
+  tasks:
+    - name: Unlock ds-agent protection
+      command: sudo /opt/ds_agent/dsa_control -s 0 -p P@ssw0rdP@ssw0rd
+      tags: unlock
+    - name: Remove ds-agent
+      command: rpm -evh ds_agent
+      tags: remove
+    - name: Transfer Deployment Script
+      copy: src=RHEL_Deployment_Script_Default_Relay.sh dest=/tmp/RHEL_Deployment_Script_Default_Relay.sh mode=0777
+      tags: transfer
+    - name: Execute the script
+      #ansible.builtin.shell: /tmp/Ubuntu_Deployment_Script_Default_Relay.sh
+      command: sh /tmp/RHEL_Deployment_Script_Default_Relay.sh
+      tags: execute
