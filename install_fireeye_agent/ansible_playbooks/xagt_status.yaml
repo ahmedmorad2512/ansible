@@ -1,8 +1,8 @@
-- name: realm permit
+- name: Check Service Status
   hosts: all
   become: yes
 #  ignore_errors: yes
 
   tasks:
-  - name: realm permit
+  - name: Check Service Status
     command: /bin/bash -c "systemctl status xagt.service"
